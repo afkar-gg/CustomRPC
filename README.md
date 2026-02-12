@@ -15,20 +15,14 @@ npm install
 cp config.example.json config.json
 ```
 
-Then edit `config.json` and set your token + RPC values.
+Then edit `config.json`.
 
 ## Run
 ```bash
 npm start
 ```
 
-## Configuration
-The app reads:
-1. `DISCORD_TOKEN` env var (first priority)
-2. `config.json` (`token` field)
-3. `config.example.json` (fallback for defaults only)
-
-### `config` shape
+## Config File
 ```json
 {
   "token": "YOUR_DISCORD_TOKEN",
@@ -49,26 +43,75 @@ The app reads:
 }
 ```
 
-### RPC fields
-- `applicationId`: Discord application ID.
-- `type`: activity type (`PLAYING`, `STREAMING`, `LISTENING`, `WATCHING`, `COMPETING`).
-- `name`, `details`, `state`: activity text.
-- `startTimestamp`, `endTimestamp`: unix ms, parseable date string, or `null`.
-- `status`: one of `online`, `idle`, `dnd`, `invisible`.
-- Images support both styles:
-  - `largeImage` / `largeImageText` / `smallImage` / `smallImageText`
-  - aliases: `imageBig` / `imageBigText` / `imageSmall` / `imageSmallText`
+## RPC Fields Explained
+- `applicationId`: Discord Application ID used for asset and rich presence metadata.
+- `type`: Activity type. Valid values: `PLAYING`, `STREAMING`, `LISTENING`, `WATCHING`, `COMPETING`.
+- `name`: Main activity line (required by Discord presence).
+- `details`: Secondary line under the activity name.
+- `state`: Third line, usually status/context.
+- `startTimestamp`: Start time shown as elapsed timer. Accepts:
+  - unix milliseconds (`1738411200000`)
+  - date string (`2026-02-12T15:00:00Z`)
+  - `null` to disable timer
+- `endTimestamp`: End time shown as countdown. Same accepted formats as `startTimestamp`.
+- `status`: Online status. Valid values: `online`, `idle`, `dnd`, `invisible`.
+- `imageBig` / `largeImage`: Large image key or URL.
+- `imageBigText` / `largeImageText`: Hover text for large image.
+- `imageSmall` / `smallImage`: Small image key or URL.
+- `imageSmallText` / `smallImageText`: Hover text for small image.
 
-## Image Notes
-- Discord CDN links (`cdn.discordapp.com`, `media.discordapp.net`) are used directly.
-- External image URLs are converted to Discord external assets using `RichPresence.getExternal`.
+## Guides
+<details>
+<summary>How to get <code>applicationId</code></summary>
+
+1. Open https://discord.com/developers/applications
+2. Create a new application (or open an existing one).
+3. Go to the app's **General Information** page.
+4. Copy **Application ID** and paste it into `rpc.applicationId`.
+
+</details>
+
+<details>
+<summary>How to make timestamps</summary>
+
+Use one of these formats:
+
+- Current time (start now):
+  ```bash
+  node -e "console.log(Date.now())"
+  ```
+- Start now, end in 1 hour:
+  ```bash
+  node -e "const now=Date.now(); console.log('start', now); console.log('end', now+60*60*1000)"
+  ```
+- ISO date string (auto parsed by code):
+  - `2026-02-12T16:30:00Z`
+
+Set either field to `null` if you don't want timers.
+
+</details>
+
+<details>
+<summary>How to set images (big/small)</summary>
+
+- For application assets:
+  1. Open your Discord application.
+  2. Go to **Rich Presence** -> **Art Assets**.
+  3. Upload images.
+  4. Use the uploaded asset key in `imageBig` / `imageSmall`.
+
+- For URL images:
+  - Discord CDN URLs are used directly.
+  - External URLs are converted through Discord external assets when possible.
+
+</details>
 
 ## Troubleshooting
-- `Missing token...`: set `DISCORD_TOKEN` or add `token` in `config.json`.
-- Activity not updating: confirm `applicationId` and image assets are valid.
-- External URL image fails: try a direct image URL or use a Discord-hosted link.
+- `Missing token...`: put token in `config.json` or set `DISCORD_TOKEN`.
+- Presence not updating: verify `applicationId`, image keys/URLs, and token validity.
+- Timers look wrong: use unix milliseconds (not seconds).
 
 ## Security
 - Never commit real tokens.
-- Keep `config.json` local and private.
-- Rotate your token immediately if it was exposed.
+- Keep `config.json` private.
+- If a token was leaked, rotate/revoke it immediately.
