@@ -1,0 +1,17 @@
+{
+  "token": "",
+  "rpc": {
+    "applicationId": "876078579698520065",
+    "type": "WATCHING",
+    "name": "Your Activity Name",
+    "details": "Optional details",
+    "state": "Optional state",
+    "startTimestamp": null,
+    "endTimestamp": null,
+    "status": "idle",
+    "imageBig": "goon",
+    "imageBigText": "Large image hover text",
+    "imageSmall": null,
+    "imageSmallText": null
+  }
+}
