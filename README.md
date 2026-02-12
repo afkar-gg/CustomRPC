@@ -112,6 +112,6 @@ Set either field to `null` if you don't want timers.
 - Timers look wrong: use unix milliseconds (not seconds).
 
 ## Security
-- Never commit real tokens.
+- Never show real token to anyone.
 - Keep `config.json` private.
 - If a token was leaked, rotate/revoke it immediately.
