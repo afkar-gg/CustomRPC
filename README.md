@@ -104,6 +104,7 @@ Set either field to `null` if you don't want timers.
   - Discord CDN URLs are used directly.
   - External URLs are converted through Discord external assets when possible.
 
+I'd Recommends to use external url via imgur or something 
 </details>
 
 ## Troubleshooting
