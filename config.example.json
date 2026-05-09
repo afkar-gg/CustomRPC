@@ -1,5 +1,7 @@
 {
   "token": "",
+  "rotationInterval": null,
+  "profiles": [],
   "rpc": {
     "applicationId": "876078579698520065",
     "type": "WATCHING",
@@ -9,9 +11,10 @@
     "startTimestamp": null,
     "endTimestamp": null,
     "status": "idle",
-    "imageBig": "goon",
-    "imageBigText": "Large image hover text",
-    "imageSmall": null,
-    "imageSmallText": null
+    "largeImage": "goon",
+    "largeImageText": "Large image hover text",
+    "smallImage": null,
+    "smallImageText": null,
+    "buttons": []
   }
 }
