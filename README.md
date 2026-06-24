@@ -22,28 +22,28 @@ Then edit `config.json`.
 npm start
 ```
 
-## Config File
-
-![Config Example](https://i.imgur.com/example-config.png)
+## Config File (Example)
 
 ```json
 {
-  "token": "YOUR_DISCORD_TOKEN",
+  "token": "MTMzOTI3NjgyMTMwODM3NTEzMQ.GnI6jV.J9B9xPlAnxe5buN8vbpjhPEqIA5k9ulSGeNaW0M",
   "rpc": {
     "type": "WATCHING",
-    "name": "Your Activity Name",
-    "details": "Optional details",
-    "state": "Optional state",
-    "startTimestamp": null,
+    "name": "A Video",
+    "details": "Google Chrome",
+    "state": "Incognito Mode",
+    "startTimestamp": 1,
     "endTimestamp": null,
     "status": "idle",
-    "imageBig": "goon",
-    "imageBigText": "Large image hover text",
-    "imageSmall": null,
-    "imageSmallText": null
+    "imageBig": "https://i.imgur.com/sAWJ80r.png",
+    "imageBigText": "Google Chrome",
+    "imageSmall": "https://i.imgur.com/Pts4gjW.png",
+    "imageSmallText": "Incognito Mode"
   }
 }
 ```
+
+![Config Example](https://i.imgur.com/IVEQO0U.png)
 
 ## RPC Fields Explained
 - `type`: Activity type. Valid values: `PLAYING`, `STREAMING`, `LISTENING`, `WATCHING`, `COMPETING`.
