@@ -23,11 +23,13 @@ npm start
 ```
 
 ## Config File
+
+![Config Example](https://i.imgur.com/example-config.png)
+
 ```json
 {
   "token": "YOUR_DISCORD_TOKEN",
   "rpc": {
-    "applicationId": "876078579698520065",
     "type": "WATCHING",
     "name": "Your Activity Name",
     "details": "Optional details",
@@ -44,7 +46,6 @@ npm start
 ```
 
 ## RPC Fields Explained
-- `applicationId`: Discord Application ID used for asset and rich presence metadata.
 - `type`: Activity type. Valid values: `PLAYING`, `STREAMING`, `LISTENING`, `WATCHING`, `COMPETING`.
 - `name`: Main activity line (required by Discord presence).
 - `details`: Secondary line under the activity name.
@@ -61,20 +62,13 @@ npm start
 - `imageSmallText` / `smallImageText`: Hover text for small image.
 
 ## Guides
-<details>
-<summary>How to get <code>applicationId</code></summary>
-
-1. Open https://discord.com/developers/applications
-2. Create a new application (or open an existing one).
-3. Go to the app's **General Information** page.
-4. Copy **Application ID** and paste it into `rpc.applicationId`.
-
-</details>
 
 <details>
 <summary>How to make timestamps</summary>
 
-Use one of these formats:
+Use https://www.unixtimestamp.com/ to get a unix timestamp in milliseconds, then multiply by 1000.
+
+For example, if you get `1738411200` from the site, use `1738411200000` in your config.
 
 - Current time (start now):
   ```bash
@@ -109,7 +103,7 @@ I'd Recommends to use external url via imgur or something
 
 ## Troubleshooting
 - `Missing token...`: put token in `config.json` or set `DISCORD_TOKEN`.
-- Presence not updating: verify `applicationId`, image keys/URLs, and token validity.
+- Presence not updating: verify image keys/URLs and token validity.
 - Timers look wrong: use unix milliseconds (not seconds).
 
 ## Security

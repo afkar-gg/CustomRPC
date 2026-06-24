@@ -45,6 +45,7 @@ const DEFAULT_RPC = {
 };
 
 const imageAssetCache = new Map();
+const IMAGE_CACHE_MAX = 256;
 const DISCORD_MEDIA_HOSTS = new Set(["cdn.discordapp.com", "media.discordapp.net"]);
 const STATUS_SET = new Set(["online", "idle", "dnd", "invisible"]);
 
@@ -139,6 +140,10 @@ async function resolveImageAsset(applicationId, image) {
     const externalPath = assets?.[0]?.external_asset_path || null;
     if (!externalPath) return null;
 
+    if (imageAssetCache.size >= IMAGE_CACHE_MAX) {
+        const oldest = imageAssetCache.keys().next().value;
+        imageAssetCache.delete(oldest);
+    }
     imageAssetCache.set(cacheKey, externalPath);
     return externalPath;
 }
@@ -183,13 +188,20 @@ async function setRpc() {
     console.log(`RPC updated (status: ${rpc.status})`);
 }
 
+let refreshInterval = null;
+
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.username} (${client.user.id})`);
+
+    if (refreshInterval !== null) {
+        clearInterval(refreshInterval);
+    }
+
     setRpc().catch(error => {
         console.error("Failed to set RPC:", error?.message || error);
     });
     // Refresh periodically in case Discord clears it.
-    setInterval(() => {
+    refreshInterval = setInterval(() => {
         setRpc().catch(error => {
             console.error("Failed to refresh RPC:", error?.message || error);
         });

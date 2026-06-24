@@ -3,7 +3,6 @@
   "rotationInterval": null,
   "profiles": [],
   "rpc": {
-    "applicationId": "876078579698520065",
     "type": "WATCHING",
     "name": "Your Activity Name",
     "details": "Optional details",
