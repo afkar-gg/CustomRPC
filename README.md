@@ -26,7 +26,7 @@ npm start
 
 ```json
 {
-  "token": "MTMzOTI3NjgyMTMwODM3NTEzMQ.GnI6jV.J9B9xPlAnxe5buN8vbpjhPEqIA5k9ulSGeNaW0M",
+  "token": "MTMzOTI3NjgyMTMwODM3NTEzMQ.GnI6jV.J9B9xPlAnxe5buN8vbpjPdU3I9aSGeNaW0M",
   "rpc": {
     "type": "WATCHING",
     "name": "A Video",
