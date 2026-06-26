@@ -14,8 +14,5 @@
   "license": "MIT",
   "dependencies": {
     "discord.js-selfbot-v13": "github:aiko-chan-ai/discord.js-selfbot-v13"
-  },
-  "overrides": {
-    "otplib": "^13.0.0"
   }
 }
