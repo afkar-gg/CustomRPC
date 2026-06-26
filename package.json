@@ -14,5 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "discord.js-selfbot-v13": "^3.6.1"
+  },
+  "overrides": {
+    "otplib": "^13.0.0"
   }
 }
