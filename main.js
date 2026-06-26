@@ -4,7 +4,7 @@
  * Logs into Discord using your user token (selfbot library) and sets a Rich Presence activity.
  */
 
-const { Client, RichPresence } = require("discord.js-selfbot-v13");
+const { Client, RichPresence, Options } = require("discord.js-selfbot-v13");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -27,7 +27,30 @@ function loadConfig() {
 
 const config = loadConfig();
 
-const client = new Client();
+const client = new Client({
+    // Disable caches since this is an RPC-only runner. 
+    // The selfbot library caches all incoming gateway events by default, 
+    // which causes massive memory leaks for users in many servers.
+    makeCache: Options.cacheWithLimits({
+        MessageManager: 0,
+        PresenceManager: 0,
+        UserManager: 0,
+        GuildMemberManager: 0,
+        ThreadManager: 0,
+        ChannelManager: 0,
+        GuildChannelManager: 0,
+        RoleManager: 0,
+        GuildEmojiManager: 0,
+        GuildManager: 0,
+        VoiceStateManager: 0,
+        ReactionManager: 0,
+        GuildInviteManager: 0,
+        GuildStickerManager: 0,
+        StageInstanceManager: 0,
+        GuildScheduledEventManager: 0,
+        ThreadMemberManager: 0,
+    }),
+});
 
 const DEFAULT_RPC = {
     applicationId: "876078579698520065",
